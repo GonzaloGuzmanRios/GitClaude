@@ -1,0 +1,95 @@
+Quiero que crees una landing page premium, moderna y orientada a conversión para una empresa llamada “Automatiza360”.
+
+Importante:
+Quiero que la implementes con React + Vite.
+Usa una estructura limpia, componentes reutilizables y estilos fáciles de editar después.
+La landing debe quedar preparada para iterarla visualmente en navegador, así que prioriza claridad en el código, buena organización y facilidad para retocar layout, espaciados, responsive y jerarquía visual.
+
+Contexto del negocio:
+Automatiza360 ayuda a pymes y negocios digitales a ahorrar tiempo y aumentar ventas mediante automatizaciones, agentes de IA y sistemas conectados con herramientas como WhatsApp, email, CRM, formularios, calendarios y bases de datos.
+
+Público objetivo:
+- Dueños de pequeñas y medianas empresas
+- Agencias
+- Consultores
+- Infoproductores
+- Negocios con procesos manuales, poco seguimiento comercial y tareas repetitivas
+
+Objetivo principal de la landing:
+Conseguir que el visitante reserve una llamada estratégica gratuita.
+
+Propuesta de valor principal:
+Implementamos automatizaciones e inteligencia artificial para que tu negocio venda más, ahorre tiempo y dependa menos de tareas manuales.
+
+Oferta principal:
+Diagnóstico gratuito de automatización para detectar cuellos de botella, tareas repetitivas y oportunidades de mejora con IA.
+
+Tono de marca:
+Tecnológico, premium, claro, confiable y orientado a negocio. Profesional pero cercano.
+
+Objetivos de diseño:
+- Estética SaaS moderna, limpia y premium
+- Debe parecer una web real de alto nivel, no una demo genérica
+- Mucha atención a jerarquía visual, espaciados, contraste y tipografía
+- Responsive real en desktop, tablet y móvil
+- Debe transmitir innovación, confianza y resultados
+- Orientada a conversión
+
+Estructura obligatoria:
+1. Hero section potente con titular orientado a beneficio
+2. Subtítulo convincente
+3. CTA principal: “Reserva una llamada”
+4. CTA secundaria: “Ver cómo funciona”
+5. Visual atractivo tipo dashboard, tarjetas o flujo de automatización
+6. Bloque de credibilidad con métricas
+7. Sección de problemas frecuentes del cliente
+8. Sección de beneficios principales
+9. Sección “Cómo funciona” en 3 pasos
+10. Sección de casos de uso
+11. Testimonios
+12. FAQ
+13. CTA final fuerte
+14. Footer profesional
+
+Contenido que quiero transmitir:
+- Menos tareas manuales
+- Respuesta más rápida a clientes
+- Mejor seguimiento comercial
+- Automatización de captación, ventas y soporte
+- Integración entre herramientas
+- Más eficiencia sin contratar más personal
+
+Casos de uso que puedes mostrar:
+- Captación automática de leads
+- Seguimiento por email o WhatsApp
+- Agendado automático de reuniones
+- Clasificación de leads con IA
+- Atención al cliente automatizada
+- Presupuestos y recordatorios automáticos
+- Sincronización entre CRM y herramientas internas
+
+Instrucciones de copy:
+- Copy comercial, claro y elegante
+- Evita clichés vacíos
+- Titulares fuertes y fáciles de entender
+- Centrado en resultados de negocio, no en tecnicismos
+
+Instrucciones de implementación:
+- Crea una estructura de archivos simple y clara
+- Separa componentes por secciones
+- Usa estilos fáciles de ajustar después
+- No sobrecargues la interfaz
+- Añade transiciones suaves y detalles modernos sin exagerar
+- Asegúrate de que sea fácil hacer cambios visuales posteriores en navegador
+
+Antes de hacer cambios:
+1. Analiza la estructura del proyecto
+2. Dime qué archivos vas a crear o modificar
+3. Propón un plan breve
+4. Después implementa la landing
+
+Cuando termines:
+- Indícame cómo levantarla en local
+- Asegúrate de que funcione bien con npm run dev
+- Deja la landing preparada para iteraciones visuales posteriores
+- Prioriza especialmente el hero, el CTA y la jerarquía visual
