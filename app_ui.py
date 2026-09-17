@@ -50,6 +50,22 @@ def delete_todo(todo_id: int):
     response.raise_for_status()
 
 
+def update_description(todo_id: int, description: str | None):
+    response = requests.patch(
+        f"{API_URL}/{todo_id}", json={"description": description or None}, timeout=5
+    )
+    response.raise_for_status()
+
+
+def description_box_height(description: str | None, words_per_line: int = 6) -> int:
+    """Calcula el alto del cuadro de descripción según su cantidad de palabras
+    (máx. 3 líneas visibles; el exceso de texto se corta con scroll interno)."""
+    word_count = len((description or "").split())
+    lines = max(1, -(-word_count // words_per_line))  # ceil sin usar math
+    lines = min(lines, 3)
+    return max(68, 34 + lines * 22)
+
+
 def parse_utc_to_local(utc_str: str | None) -> datetime | None:
     """Convierte un timestamp UTC devuelto por la API (ISO 8601, p. ej. '2026-08-28T19:06:19')
     a un datetime con la hora local del PC."""
@@ -145,9 +161,11 @@ st.subheader("Tareas")
 if not todos:
     st.info("No hay tareas todavía. Crea una con el formulario de arriba.")
 else:
-    COLS = [1, 2.5, 3.5, 2, 2, 1.5, 1.5]
+    COLS = [1, 2.2, 3.0, 1.1, 1.8, 1.8, 1.3, 1.3]
     header = st.columns(COLS)
-    for col, label in zip(header, ["ID", "Título", "Descripción", "Creado", "Estado", "", ""]):
+    for col, label in zip(
+        header, ["ID", "Título", "Descripción", "", "Creado", "Estado", "", ""]
+    ):
         col.markdown(f"**{label}**")
 
     for todo in todos:
@@ -162,30 +180,44 @@ else:
             f"<div style='background-color:{bg};padding:6px;border-radius:4px'>{todo['title']}</div>",
             unsafe_allow_html=True,
         )
-        row[2].markdown(
-            f"<div style='background-color:{bg};padding:6px;border-radius:4px'>{todo.get('description') or '-'}</div>",
-            unsafe_allow_html=True,
+        # La descripción es editable independientemente del estado de la tarea.
+        # El alto del cuadro crece según la cantidad de palabras (máx. 3 líneas;
+        # el resto queda accesible con scroll interno del propio text_area).
+        description_value = todo.get("description") or ""
+        new_description = row[2].text_area(
+            "Descripción",
+            value=description_value,
+            height=description_box_height(description_value),
+            key=f"desc_{todo['id']}",
+            label_visibility="collapsed",
         )
-        row[3].markdown(
+        if row[3].button("💾", key=f"save_desc_{todo['id']}", help="Guardar descripción"):
+            try:
+                update_description(todo["id"], new_description.strip())
+                st.success("Descripción actualizada.")
+                st.rerun()
+            except requests.RequestException as exc:
+                st.error(f"Error al actualizar la descripción: {exc}")
+        row[4].markdown(
             f"<div style='background-color:{bg};padding:6px;border-radius:4px'>{utc_to_local_str(todo.get('created_at'))}</div>",
             unsafe_allow_html=True,
         )
-        row[4].markdown(
+        row[5].markdown(
             f"<div style='background-color:{bg};padding:6px;border-radius:4px'>{STATUS_LABELS.get(todo['status'], todo['status'])}</div>",
             unsafe_allow_html=True,
         )
 
         if todo["status"] != "done":
-            if row[5].button("Completar", key=f"done_{todo['id']}"):
+            if row[6].button("Completar", key=f"done_{todo['id']}"):
                 try:
                     mark_done(todo["id"])
                     st.rerun()
                 except requests.RequestException as exc:
                     st.error(f"Error al actualizar la tarea: {exc}")
         else:
-            row[5].write("")
+            row[6].write("")
 
-        if row[6].button("Eliminar", key=f"delete_{todo['id']}"):
+        if row[7].button("Eliminar", key=f"delete_{todo['id']}"):
             try:
                 delete_todo(todo["id"])
                 st.rerun()
